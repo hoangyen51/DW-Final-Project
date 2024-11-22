@@ -1,0 +1,114 @@
+﻿-- MDX query 1: Average Cost per Order
+WITH 
+    MEMBER [Measures].[Average Cost per Order] AS
+        [Measures].[Order Total Cost] / [Measures].[Fact Purchase Order Count],
+        FORMAT_STRING = "Currency"
+SELECT 
+    {[Measures].[Order Total Cost], [Measures].[Fact Purchase Order Count], 
+	[Measures].[Average Cost per Order]} ON COLUMNS,
+    CROSSJOIN(
+        FILTER([Order Date].[The Year].MEMBERS, [Order Date].[The Year].MEMBER_VALUE >= 2011 
+		       AND [Order Date].[The Year].MEMBER_VALUE <= 2014),
+        [Order Date].[The Quarter].MEMBERS
+    ) ON ROWS
+FROM [DW Final Purchasing]
+
+
+
+-- MDX query 2: Rejected Rate
+WITH 
+    MEMBER [Measures].[Rejected Rate] AS
+        [Measures].[Rejected Qty] / [Measures].[Order Quantity],
+        FORMAT_STRING = "Percent"
+SELECT 
+    {[Measures].[Order Quantity], [Measures].[Rejected Qty], 
+	[Measures].[Rejected Rate]} ON COLUMNS
+FROM [DW Final Purchasing]
+
+
+
+-- MDX query 3: Received Rate
+WITH 
+    MEMBER [Measures].[Received Rate] AS
+        [Measures].[Received Qty] / [Measures].[Order Quantity],
+        FORMAT_STRING = "Percent"
+SELECT 
+    {[Measures].[Order Quantity], [Measures].[Received Qty], 
+	[Measures].[Received Rate]} ON COLUMNS
+FROM [DW Final Purchasing]
+
+
+
+-- MDX query 4: Purchase orders of each Products per Year
+SELECT 
+  NON EMPTY {[Measures].[Fact Purchase Order Count]} ON COLUMNS,
+  TOPCOUNT(
+    ([Order Date].[The Year].[The Year].MEMBERS 
+    *[Order Date].[The Quarter].[The Quarter] 
+    *[Dim Product].[Product Name].[Product Name]), 10, ([Measures].[Fact Purchase Order Count])
+  )ON ROWS
+FROM [DW Final Purchasing]
+
+
+
+-- MDX query 5: Total cost per Vendor
+SELECT 
+    [Measures].[Order Total Cost] ON COLUMNS,
+    ORDER(
+        NONEMPTY([Dim Vendor].[Company Name].MEMBERS, [Measures].[Order Total Cost]), 
+        [Measures].[Order Total Cost], 
+        BDESC
+    ) ON ROWS
+FROM [DW Final Purchasing]
+
+
+
+-- MDX query 6: Spend Growth Rate per Vendor
+WITH 
+MEMBER [Measures].[Previous Year Spend] AS
+    SUM(
+        ParallelPeriod(
+            [Order Date].[The Year].[The Year], 1, [Order Date].[The Year].CURRENTMEMBER
+        ),
+        [Measures].[Order Total Cost]
+    )
+
+MEMBER [Measures].[Spend Growth Rate] AS
+    IIF(
+        [Measures].[Previous Year Spend] = 0,
+        NULL, --Avoid dividing by zero
+        ([Measures].[Order Total Cost] - [Measures].[Previous Year Spend]) / [Measures].[Previous Year Spend]
+    ),
+    FORMAT_STRING = 'Percent'
+
+MEMBER [Measures].[NonEmptyYearCount] AS
+    Count(
+        Filter(
+            Except([Order Date].[The Year].MEMBERS, {[Order Date].[The Year].&[2015]}), -- Loại năm 2015
+            NOT IsEmpty([Measures].[Order Total Cost])
+        )
+    )
+
+SELECT 
+    NON EMPTY 
+    FILTER(
+        [Dim Vendor].[Company Name].MEMBERS,
+        [Measures].[NonEmptyYearCount] >= 3
+    ) 
+    * Except([Order Date].[The Year].MEMBERS, {[Order Date].[The Year].&[2015]}) ON ROWS, -- Loại năm 2015
+    {[Measures].[Order Total Cost], [Measures].[Previous Year Spend], [Measures].[Spend Growth Rate]} ON COLUMNS
+FROM [DW Final Purchasing]
+
+
+
+-- MDX query 7: Freight Cost per Unit
+WITH 
+    MEMBER [Measures].[FreightCostPerUnit] AS
+        [Measures].[Freight] / [Measures].[Order Quantity]
+    
+SELECT 
+    {[Measures].[FreightCostPerUnit]} ON COLUMNS,
+    NONEMPTY([Dim Product].[Product Name].MEMBERS) ON ROWS
+FROM [DW Final Purchasing]
+
+
