@@ -1,0 +1,89 @@
+﻿<DeploymentSnapshot xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0">
+  <Target>
+    <Database>DW_Final_Purchasing</Database>
+    <Server>DESKTOP-2VSR1SE</Server>
+    <ConnectionString>Data Source=DESKTOP-2VSR1SE;Timeout=0</ConnectionString>
+  </Target>
+  <Options>
+    <TransactionalDeployment>false</TransactionalDeployment>
+    <PartitionDeployment>DeployPartitions</PartitionDeployment>
+    <RoleDeployment>DeployRolesRetainMembers</RoleDeployment>
+    <ProcessingOption>Default</ProcessingOption>
+    <OutputScript></OutputScript>
+    <ImpactAnalysisFile></ImpactAnalysisFile>
+    <ConfigurationSettingsDeployment>Deploy</ConfigurationSettingsDeployment>
+    <OptimizationSettingsDeployment>Deploy</OptimizationSettingsDeployment>
+    <WriteBackTableCreation>UseExisting</WriteBackTableCreation>
+  </Options>
+  <Snapshot>
+    <ObjectSnapshots>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.RelationalDataSource</Type>
+        <TimeStamp>umqYC1OMBM3BCu0rqAahWKb4M4g=11/21/2024 2:28:06 PM11/21/2024 5:10:03 AM</TimeStamp>
+        <ID>
+          <String>DW_Final_Purchasing</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.DataSourceView</Type>
+        <TimeStamp>n/UkYtmLfVv+P6QVRhCKh4DgYJQ=11/21/2024 5:10:23 AM11/21/2024 5:10:23 AM</TimeStamp>
+        <ID>
+          <String>DW Final Purchasing</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>mYvfC6091pg/wgRP8ZHmKpxvcwc=11/21/2024 5:11:01 AM11/21/2024 5:10:36 AM</TimeStamp>
+        <ID>
+          <String>Dim Vendor</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>LTBZspBEeLfLO1+BEiGmdBgHvIQ=11/21/2024 5:11:33 AM11/21/2024 5:10:36 AM</TimeStamp>
+        <ID>
+          <String>Dim Employee</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>7tDpQB1uhXu3Z61dFaUhbQhKZ88=11/21/2024 5:12:13 AM11/21/2024 5:10:36 AM</TimeStamp>
+        <ID>
+          <String>Dim Time</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>oY+yRUOuCI8JzA1qhVspw1PUVoQ=11/21/2024 5:12:43 AM11/21/2024 5:10:36 AM</TimeStamp>
+        <ID>
+          <String>Dim Ship Method</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>efL7sdNM0hZYdsdsu6f3ZqbuSbc=11/21/2024 5:13:28 AM11/21/2024 5:10:36 AM</TimeStamp>
+        <ID>
+          <String>Dim Product</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Cube</Type>
+        <TimeStamp>Y9i6R47jk/+1TUzmbU3li14t3JY=11/21/2024 9:42:35 AM11/21/2024 5:10:36 AM5ub2s+22H3RkYsdlVT++g9+Hir0=11/21/2024 5:10:36 AM11/21/2024 5:10:36 AM</TimeStamp>
+        <ID>
+          <String>DW Final Purchasing</String>
+        </ID>
+      </ObjectSnapshot>
+    </ObjectSnapshots>
+    <DatabaseSnapshot>
+      <Type>Microsoft.AnalysisServices.Database</Type>
+      <TimeStamp>mvh6O18Ntkbw49hWxRbSkk3GPH4=11/21/2024 1:34:00 AM11/21/2024 1:34:00 AM</TimeStamp>
+      <ID>
+        <String>DW_Final_Purchasing</String>
+      </ID>
+    </DatabaseSnapshot>
+    <Granularity>Coarse</Granularity>
+  </Snapshot>
+  <AssemblyLocations />
+  <ProcessingComplete>true</ProcessingComplete>
+  <LastDeployed>2024-11-21T07:28:15.063333Z</LastDeployed>
+</DeploymentSnapshot>
